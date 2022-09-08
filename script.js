@@ -16,7 +16,6 @@ let subtotal = calculator.subtotal;
 
 //Variables needed to validate inputs
 let operatorList = ["+", "-", "*", "/"];
-let numberRegex = /^[0-9]+$/;
 
 
 //ADD FUNCTION
@@ -126,7 +125,6 @@ function display(value) {
 }
 
 function inputDecimal(dot) {
-    console.log('inside decimal function')
     // if nothing is displayed as v2, add '0.'
     if (v2 === '') {
         displayValue = "0.";
@@ -141,7 +139,6 @@ function inputDecimal(dot) {
 
 //CLEAR DISPLAY
 function clear() {
-
     //if display is already clear, reset history
     if(displayValue == null){
         v1 = '';
