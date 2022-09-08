@@ -59,97 +59,100 @@ function operate(operator, s1, s2){
     } 
 };
 
+
+//DISPLAY VALUES EACH ROUND
+function display(value) {
+    
+    let currentNumber = document.getElementById("display").value;
+    
+    document.getElementById("btn-clear").value = 'C'; // activate btn C over AC everytime a key is clicked
+    
+    switch (value) {
+        
+        case 'c':
+            clear();
+            break;
+            
+            case '.':
+                inputDecimal(value);
+                break;
+                
+                case '=':
+            subtotal = operate(operator, v1, v2);
+            displayValue = parseFloat(subtotal.toFixed(10));
+            break;
+            
+            case '+':
+                case '-':
+                    case '*':
+                        case '/':
+                            if (operatorList.includes(value) && !operator){
+                                v1 = document.getElementById("display").value;
+                                operator = value;
+                                displayValue = '';
+                                v2 = "";
+                                
+                                
+                            } else if (operatorList.includes(value) && operator){
+                                v2 = document.getElementById("display").value;
+                                subtotal = operate(operator, v1, v2);
+                                displayValue = parseFloat(subtotal.toFixed(10));
+                                v1 = subtotal;
+                                operator = value;
+                                v2 = "";
+                            }
+                            break;
+                            
+                            default:
+                                if (value === 'backspace'){
+                                    displayValue = displayValue.slice(0, -1);
+                                    v2 = displayValue;
+                                } else{
+                                    v2 += value;
+                                    if (!v1) {
+                                        displayValue = currentNumber + value;
+                                    } else {
+                                        displayValue = v2;
+                                    }
+                                }
+                                break;
+                            }
+                            displayUpdate();
+                        }
+                        
+                        function inputDecimal(dot) {
+                            // if nothing is displayed as v2, add '0.'
+                            if (v2 === '') {
+                                displayValue = "0.";
+                                displayUpdate();
+                            }
+                            if (!displayValue.includes(dot)) {
+                                displayValue += ".";
+                                v2 = displayValue;
+                                displayUpdate();
+                            }
+  }
+
+
 //REFRESHS DISPLAY VALUES EACH ROUND
 function displayUpdate(){
     document.getElementById("display").value = displayValue;
 }
 
-//DISPLAY VALUES EACH ROUND
-function display(value) {
 
-    let currentNumber = document.getElementById("display").value;
-
-    document.getElementById("btn-clear").value = 'C'; // activate btn C over AC everytime a key is clicked
-
-    switch (value) {
-
-        case 'c':
-            clear();
-            break;
-
-        case '.':
-            inputDecimal(value);
-            break;
-            
-        case '=':
-            subtotal = operate(operator, v1, v2);
-            displayValue = subtotal;
-            break;
-               
-        case '+':
-        case '-':
-        case '*':
-        case '/':
-            if (operatorList.includes(value) && !operator){
-                v1 = document.getElementById("display").value;
-                operator = value;
-                displayValue = '';
-                v2 = "";
-
-
-            } else if (operatorList.includes(value) && operator){
-                v2 = document.getElementById("display").value;
-                subtotal = operate(operator, v1, v2);
-                displayValue = subtotal;
-                v1 = subtotal;
-                operator = value;
-                v2 = "";
-            }
-            break;
+  //CLEAR DISPLAY
+  function clear() {
+      //if display is already clear, reset history
+      if(displayValue == null){
+          v1 = '';
+          operator = '';
+          subtotal = 0;
+        }
         
-        default:
-            if (value === 'backspace'){
-                displayValue = displayValue.slice(0, -1);
-                v2 = displayValue;
-            } else{
-                v2 += value;
-                if (!v1) {
-                    displayValue = currentNumber + value;
-                } else {
-                    displayValue = v2;
-                }
-            }
-                break;
-    }
-    displayUpdate();
-}
-
-function inputDecimal(dot) {
-    // if nothing is displayed as v2, add '0.'
-    if (v2 === '') {
-        displayValue = "0.";
+        v2 = '';
+        displayValue = null;
         displayUpdate();
+        document.getElementById("btn-clear").value = 'AC'; //activate btn AC
+        
     }
-    if (!displayValue.includes(dot)) {
-        displayValue += ".";
-        v2 = displayValue;
-        displayUpdate();
-    }
-  }
-
-//CLEAR DISPLAY
-function clear() {
-    //if display is already clear, reset history
-    if(displayValue == null){
-        v1 = '';
-        operator = '';
-        subtotal = 0;
-        console.log('clear')
-    }
-
-    v2 = '';
-    displayValue = null;
-    displayUpdate();
-    document.getElementById("btn-clear").value = 'AC'; //activate btn AC
-
-}
+    
