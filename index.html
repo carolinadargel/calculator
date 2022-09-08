@@ -23,7 +23,13 @@
           <tr>
             <td colspan="3"> <input class="display-box" type="text" id="display" disabled /> </td>
             <!-- clearScreen() function clears all the values -->
-            <td> <input type="button" value="C" onclick="clear()" id="btn-clear" /> </td>
+            <td> <input type="button" value="C" onclick="display('c')" id="btn-clear" /> </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td colspan="1"> <input type="button" value="<" onclick="display('backspace')" id="btn"/> </td>
           </tr>
           <tr>
             <!-- display() function displays the value of clicked button -->
