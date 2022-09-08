@@ -1,8 +1,20 @@
-let values = [];
-let operations = [];
-let subtotal = "";
-let currentValue = "";
-let count = 0;
+let calculator = {
+    displayValue: '',
+    firstValue: null, 
+    SecondValue: '',
+    operator: null, 
+    subtotal: '',
+    };
+
+let v1 = calculator.firstValue;
+let v2 = calculator.SecondValue;
+let displayValue = calculator.displayValue;
+let operator = calculator.operator;
+let subtotal = calculator.subtotal;  
+
+let operatorList = ["+", "-", "*", "/"];
+let numberRegex = /^[0-9]+$/;
+
 
 //ADD FUNCTION
 function add(n1, n2){
@@ -42,49 +54,45 @@ function operate(operator, s1, s2){
     } 
 };
 
+//REFRESHS DISPLAY VALUES EACH ROUND
+function displayUpdate(){
+    document.getElementById("display").value = displayValue;
+}
+
 //DISPLAY VALUES EACH ROUND
 function display(value) {
-    let operator = ["+", "-", "*", "/"];
-    let numberRegex = /^[0-9]+$/;
+
     let currentNumber = document.getElementById("display").value;
     
-
-    if (value.match(numberRegex) && subtotal == "") {
-        document.getElementById("display").value += value;
-    } else {
-        // 
-    }
-
-    if (operator.includes(value)){
-        operations.push(value);
-        values.push(currentNumber);
-        clear();
-        
-        if (values.length % 2 == 0) {
-            values.push(result(values[0], values[1]));
-            values.slice(0,2);
-            operations.shift();
-            document.getElementById("display").value = values[0];
+    if (value.match(numberRegex)) {
+        if (!v1) {
+            displayValue = currentNumber + value;
+            displayUpdate();    
+        } else {
+        v2 += value;
+        displayValue = v2;
+        displayUpdate();
         }
-    } 
-    
+    } else if (operatorList.includes(value) && !operator){
+        v1 = document.getElementById("display").value;
+        operator = value;
+        displayValue = '';
+        displayUpdate();
+
+    } else if (operatorList.includes(value) && operator){
+        v2 = document.getElementById("display").value;
+        subtotal = operate(operator, v1, v2);
+        displayValue = subtotal;
+        v1 = subtotal;
+        operator = value;
+        v2 = "";
+        displayUpdate();
+    }
 }
+
 
 //CLEAR ALL THE VALUES
 function clear() {
-    document.getElementById("display").value = "";
-}
- 
-//CALCULATE SUBTOTAL
-function result(v1, v2){
-    
-    let total;
-       
-    total = operate(operations[operations.length - 2], v1, v2);
-
-    values = [];
-    values.push(total);
-    subtotal = total;
-    currentValue = "";
-    
+    displayValue = '0';
+    displayUpdate();
 }
