@@ -35,9 +35,6 @@ function multiply(n1, n2){
 
 //DIVIDE FUNCTION
 function divide(n1, n2){
-    if (n2 === 0) {
-        return 0;
-    }
     return n1 / n2;
 };
 
