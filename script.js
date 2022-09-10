@@ -133,14 +133,12 @@ function inputDecimal(dot) {
     // if nothing is displayed as v2, add '0.'
     if (v2 === '') {
         displayValue = "0.";
-        displayUpdate();
     }
     if (!displayValue.includes(dot)) {
         displayValue += ".";
         v2 = displayValue;
-    // if nothing is displayed as v2, add '0.'
-    displayUpdate();
     }
+    displayUpdate();
 }
 
 
