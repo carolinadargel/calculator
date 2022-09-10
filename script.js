@@ -107,14 +107,17 @@ function display(value) {
             if (value === 'backspace'){
                 displayValue = displayValue.slice(0, -1);
                 v2 = displayValue;
+
             } else if (displayValue === '0' && value === '0') {
                 displayValue = v2;
+                
             } else {
                 if (displayValue == '0') {
                     v2 = value;
                 }
-                else { v2 += value
-                } if (!v1) {
+                else { v2 += value }
+                
+                if (!v1) {
                     displayValue = currentNumber + value;
                 } else {
                     displayValue = v2;
