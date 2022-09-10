@@ -83,39 +83,39 @@ function display(value) {
         case '-':
         case '*':
         case '/':
-                if (displayValue == ''){
+            if (displayValue == ''){
+                operator = value;
+            
+            } else {
+                if (operatorList.includes(value) && !operator){
+                    v1 = document.getElementById("display").value;
                     operator = value;
-                
-                } else {
-                    if (operatorList.includes(value) && !operator){
-                        v1 = document.getElementById("display").value;
-                        operator = value;
-                        displayValue = '';
-                        v2 = "";    
-                    } else if (operatorList.includes(value) && operator){
-                        v2 = document.getElementById("display").value;
-                        subtotal = operate(operator, v1, v2);
-                        displayValue = parseFloat(subtotal.toFixed(10));
-                        v1 = subtotal;
-                        operator = value;
-                        v2 = "";
-                    }
+                    displayValue = '';
+                    v2 = "";    
+                } else if (operatorList.includes(value) && operator){
+                    v2 = document.getElementById("display").value;
+                    subtotal = operate(operator, v1, v2);
+                    displayValue = parseFloat(subtotal.toFixed(10));
+                    v1 = subtotal;
+                    operator = value;
+                    v2 = "";
                 }
+            }
             break;
                 
-            default:
-                if (value === 'backspace'){
-                    displayValue = displayValue.slice(0, -1);
-                    v2 = displayValue;
-                } else{
-                    v2 += value;
-                    if (!v1) {
-                        displayValue = currentNumber + value;
-                    } else {
-                        displayValue = v2;
-                    }
+        default:
+            if (value === 'backspace'){
+                displayValue = displayValue.slice(0, -1);
+                v2 = displayValue;
+            } else{
+                v2 += value;
+                if (!v1) {
+                    displayValue = currentNumber + value;
+                } else {
+                    displayValue = v2;
                 }
-                break;
+            }
+            break;
     }
     displayUpdate();
 }
