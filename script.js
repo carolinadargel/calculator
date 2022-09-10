@@ -73,65 +73,65 @@ function display(value) {
             clear();
             break;
             
-            case '.':
-                inputDecimal(value);
-                break;
+        case '.':
+            inputDecimal(value);
+            break;
                 
-                case '=':
+        case '=':
             subtotal = operate(operator, v1, v2);
             displayValue = parseFloat(subtotal.toFixed(10));
             break;
             
-            case '+':
-                case '-':
-                    case '*':
-                        case '/':
-                            if (operatorList.includes(value) && !operator){
-                                v1 = document.getElementById("display").value;
-                                operator = value;
-                                displayValue = '';
-                                v2 = "";
-                                
-                                
-                            } else if (operatorList.includes(value) && operator){
-                                v2 = document.getElementById("display").value;
-                                subtotal = operate(operator, v1, v2);
-                                displayValue = parseFloat(subtotal.toFixed(10));
-                                v1 = subtotal;
-                                operator = value;
-                                v2 = "";
-                            }
-                            break;
-                            
-                            default:
-                                if (value === 'backspace'){
-                                    displayValue = displayValue.slice(0, -1);
-                                    v2 = displayValue;
-                                } else{
-                                    v2 += value;
-                                    if (!v1) {
-                                        displayValue = currentNumber + value;
-                                    } else {
-                                        displayValue = v2;
-                                    }
-                                }
-                                break;
-                            }
-                            displayUpdate();
-                        }
+        case '+':
+        case '-':
+        case '*':
+        case '/':
+            if (operatorList.includes(value) && !operator){
+                v1 = document.getElementById("display").value;
+                operator = value;
+                displayValue = '';
+                v2 = "";    
+                
+            } else if (operatorList.includes(value) && operator){
+                v2 = document.getElementById("display").value;
+                subtotal = operate(operator, v1, v2);
+                displayValue = parseFloat(subtotal.toFixed(10));
+                v1 = subtotal;
+                operator = value;
+                v2 = "";
+            }
+            break;
+                
+            default:
+                if (value === 'backspace'){
+                    displayValue = displayValue.slice(0, -1);
+                    v2 = displayValue;
+                } else{
+                    v2 += value;
+                    if (!v1) {
+                        displayValue = currentNumber + value;
+                    } else {
+                        displayValue = v2;
+                    }
+                }
+                break;
+    }
+    displayUpdate();
+}
                         
-                        function inputDecimal(dot) {
-                            // if nothing is displayed as v2, add '0.'
-                            if (v2 === '') {
-                                displayValue = "0.";
-                                displayUpdate();
-                            }
-                            if (!displayValue.includes(dot)) {
-                                displayValue += ".";
-                                v2 = displayValue;
-                                displayUpdate();
-                            }
-  }
+function inputDecimal(dot) {
+    // if nothing is displayed as v2, add '0.'
+    if (v2 === '') {
+        displayValue = "0.";
+        displayUpdate();
+    }
+    if (!displayValue.includes(dot)) {
+        displayValue += ".";
+        v2 = displayValue;
+    // if nothing is displayed as v2, add '0.'
+    displayUpdate();
+    }
+}
 
 
 //REFRESHS DISPLAY VALUES EACH ROUND
@@ -140,19 +140,18 @@ function displayUpdate(){
 }
 
 
-  //CLEAR DISPLAY
-  function clear() {
-      //if display is already clear, reset history
-      if(displayValue == null){
-          v1 = '';
-          operator = '';
-          subtotal = 0;
-        }
-        
-        v2 = '';
-        displayValue = null;
-        displayUpdate();
-        document.getElementById("btn-clear").value = 'AC'; //activate btn AC
-        
+//CLEAR DISPLAY
+function clear() {
+//if display is already clear, reset history
+    if(displayValue == null){
+        v1 = '';
+        operator = '';
+        subtotal = 0;
     }
+
+    v2 = '';
+    displayValue = null;
+    displayUpdate();
+    document.getElementById("btn-clear").value = 'AC'; //activate btn AC
+}
     
