@@ -107,10 +107,11 @@ function display(value) {
             if (value === 'backspace'){
                 displayValue = displayValue.slice(0, -1);
                 v2 = displayValue;
-
+            
+            //treating double zeros on the left of the dot 
             } else if (displayValue === '0' && value === '0') {
                 displayValue = v2;
-                
+
             } else {
                 if (displayValue == '0') {
                     v2 = value;
